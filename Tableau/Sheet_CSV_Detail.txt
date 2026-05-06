@@ -1,0 +1,13 @@
+1. 1D (Linear) Data Visualization : adult.csv
+
+2. 2D (Planar) Data Visualization : lris.csv
+
+3. 3D (Volumetric) Data Visualization : lris.csv
+
+4. Temporal Data Visualization : GOOGL_2006-01-01_to_2018-01-01.csv
+
+5. Multidimentional Data Visualization : adult.csv
+
+6. Hierarchical Data Visualization : data_Hierarchical_1level.csv
+
+7. Network Data Visualization : 

@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Scraped Reviews</h2>
+
+{% for review in reviews %}
+    <div class="card">
+        <p><strong>Product:</strong> {{ review.Product }}</p>
+        <p><strong>Name:</strong> {{ review.Name }}</p>
+        <p><strong>Rating:</strong> {{ review.Rating }}</p>
+        <p><strong>Title:</strong> {{ review.CommentHead }}</p>
+        <p><strong>Comment:</strong> {{ review.Comment }}</p>
+    </div>
+{% endfor %}
+
+{% endblock %}
+
+
+<!--
+======================================================================
+EXPLANATION OF home.html
+======================================================================
+
+WHAT THIS FILE IS:
+------------------
+home.html is an ALTERNATIVE REVIEW DISPLAY page that shows scraped
+reviews using a card-based layout instead of a plain table.
+
+It extends base.html, so it automatically gets the blue header,
+footer, and styled container. Each review is displayed as a
+separate white card with bold labels and readable spacing.
+
+IMPORTANT NOTE:
+---------------
+home.html is NOT currently linked to any route in main.py.
+The active result page is results.html (rendered by the "/" route).
+home.html is an unused template — it exists as an alternative
+card-style layout that the developer built but did not activate.
+
+To use home.html instead of results.html, change this line in main.py:
+    return render_template("results.html", reviews=reviews)
+to:
+    return render_template("home.html", reviews=reviews)
+
+LINE-BY-LINE EXPLANATION:
+--------------------------
+
+{% extends "base.html" %}
+  → Declares that this template inherits from base.html.
+  → The full HTML skeleton (DOCTYPE, head, header, footer, container)
+    comes from base.html. This file only defines its content block.
+
+{% block content %}
+  → Opens the replaceable content section.
+  → Everything between {% block content %} and {% endblock %} is
+    inserted into the <div class="container"> in base.html.
+
+<h2>Scraped Reviews</h2>
+  → A heading displayed above the list of review cards.
+  → Serves as a visual label for the section.
+
+{% for review in reviews %}
+  → Jinja2 loop that iterates over the "reviews" list passed from Flask.
+  → Each "review" is a Python dictionary with keys:
+      Product, Name, Rating, CommentHead, Comment
+
+    <div class="card">
+  → Each review is wrapped in a <div> with class "card".
+  → The .card CSS class in style.css adds:
+      • White background
+      • 15px padding (inner spacing)
+      • 15px top/bottom margin (space between cards)
+      • Rounded corners (border-radius: 10px)
+      • A soft drop shadow (box-shadow)
+  → This creates a visually clean, separated card for each review.
+
+        <p><strong>Product:</strong> {{ review.Product }}</p>
+  → Shows the product name the user searched for.
+  → <strong> makes the label "Product:" appear in bold.
+  → {{ review.Product }} outputs the value from the dictionary.
+
+        <p><strong>Name:</strong> {{ review.Name }}</p>
+  → Shows the reviewer's name parsed from the Flipkart review block.
+  → May display "No Name" if the name could not be extracted.
+
+        <p><strong>Rating:</strong> {{ review.Rating }}</p>
+  → Shows the star rating (e.g., "4★", "3.5★").
+  → May show "No Rating" if the rating line wasn't found.
+
+        <p><strong>Title:</strong> {{ review.CommentHead }}</p>
+  → Shows the review headline/title (the short summary of the review).
+  → Stored in MongoDB as "CommentHead".
+  → May show "No Title" if it couldn't be parsed.
+
+        <p><strong>Comment:</strong> {{ review.Comment }}</p>
+  → Shows the full review body text written by the buyer.
+  → May show "No Comment" if the comment section was empty.
+
+    </div>
+  → Closes the card div for this review.
+
+{% endfor %}
+  → Ends the loop. No more review cards after this point.
+
+{% endblock %}
+  → Closes the content block. Jinja2 stops inserting here.
+
+COMPARISON — home.html vs results.html:
+-----------------------------------------
+  Feature              home.html              results.html
+  ─────────────────    ──────────────────     ────────────────────
+  Layout style         Card-based (divs)      Table rows
+  Extends base.html    YES                    NO (standalone)
+  Has header/footer    YES (from base.html)   NO
+  CSS styled           YES (.card class)      NO (only border="1")
+  Shows "Product"      YES                    NO
+  Currently active     NO (unused)            YES (used in main.py)
+
+WHY CARDS ARE BETTER THAN TABLES FOR REVIEWS:
+----------------------------------------------
+  Cards allow longer text to wrap naturally without squeezing into
+  a narrow table cell. Each review feels like a self-contained unit.
+  For data with long text fields (like product reviews), cards are
+  generally more readable than tables on most screen sizes.
+
+CSS CLASSES USED:
+-----------------
+  .card    → White rounded box with shadow (defined in style.css)
+  <strong> → Bold text for labels (browser default, no custom CSS needed)
+======================================================================
+-->

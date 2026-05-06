@@ -1,0 +1,208 @@
+/* General Reset */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+/* Header */
+header {
+    background-color: #2874f0;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+/* Container */
+.container {
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+/* Search Box */
+.search-box {
+    text-align: center;
+}
+
+.search-box input {
+    padding: 10px;
+    width: 60%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-box button {
+    padding: 10px 20px;
+    background-color: #2874f0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background-color: #0b5ed7;
+}
+
+/* Error */
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
+/* Cards */
+.card {
+    background-color: white;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #2874f0;
+    color: white;
+    margin-top: 30px;
+}
+
+
+/*
+======================================================================
+EXPLANATION OF style.css
+======================================================================
+
+WHAT THIS FILE IS:
+------------------
+style.css is the STYLESHEET for the entire web application. It
+controls the visual appearance of every page that links to it.
+Currently only base.html (and pages that extend it, like index.html
+and home.html) link to this file. results.html does NOT use it.
+
+This file uses CSS (Cascading Style Sheets) — a language that
+describes HOW HTML elements should be displayed on screen.
+
+SECTION-BY-SECTION EXPLANATION:
+---------------------------------
+
+--- 1. body (General Reset) ---
+
+body {
+    font-family: Arial, sans-serif;     → Sets Arial as the default font for all text.
+    margin: 0;                          → Removes the browser's default outer spacing
+                                          so the header stretches edge-to-edge.
+    background-color: #f4f4f4;          → Light grey background for the whole page.
+                                          Hex #f4f4f4 is a very light, near-white grey.
+}
+
+--- 2. header ---
+
+header {
+    background-color: #2874f0;          → Flipkart's signature blue colour for the header bar.
+    color: white;                       → White text so it's readable on the blue background.
+    padding: 15px;                      → 15px of inner spacing on all 4 sides of the header.
+    text-align: center;                 → Centers the "Flipkart Review Scraper" heading text.
+}
+
+--- 3. .container ---
+
+.container {
+    width: 80%;                         → Content area takes up 80% of the browser window width.
+    margin: auto;                       → "auto" on left/right margins automatically centers
+                                          the container horizontally on the page.
+    margin-top: 30px;                   → Adds 30px of space above the content area,
+                                          pushing it away from the header.
+}
+
+--- 4. .search-box ---
+
+.search-box {
+    text-align: center;                 → Centers the form (input + button) horizontally.
+}
+
+.search-box input {
+    padding: 10px;                      → Inner spacing inside the text field for comfort.
+    width: 60%;                         → The input takes 60% of the container width.
+    border: 1px solid #ccc;             → Thin light-grey border around the input field.
+    border-radius: 5px;                 → Slightly rounds the corners of the input box.
+}
+
+.search-box button {
+    padding: 10px 20px;                 → 10px top/bottom, 20px left/right padding inside the button.
+    background-color: #2874f0;          → Same Flipkart blue as the header (consistent branding).
+    color: white;                       → White text on the blue button.
+    border: none;                       → Removes the default grey browser border on buttons.
+    border-radius: 5px;                 → Rounds the button corners to match the input field.
+    cursor: pointer;                    → Changes the mouse cursor to a hand icon on hover,
+                                          signalling the button is clickable.
+}
+
+.search-box button:hover {
+    background-color: #0b5ed7;          → Darker blue when the mouse hovers over the button.
+                                          This is a visual feedback effect (hover state).
+}
+
+--- 5. .error ---
+
+.error {
+    color: red;                         → Makes error messages display in bright red text.
+    margin-top: 10px;                   → Adds 10px space between the form and the error message.
+}
+  → Applied to <p class="error"> in index.html when Flask passes an error variable.
+  → Examples: "No products found", "An error occurred", etc.
+
+--- 6. .card ---
+
+.card {
+    background-color: white;            → White card background contrasts with the grey page bg.
+    padding: 15px;                      → Inner spacing so text doesn't touch the card edges.
+    margin: 15px 0;                     → 15px space above and below each card (0 left/right).
+    border-radius: 10px;                → Rounded corners give the card a modern, soft look.
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); → Subtle drop shadow around the card:
+                                          0    → no horizontal offset
+                                          0    → no vertical offset
+                                          10px → blur radius (how soft the shadow is)
+                                          rgba(0,0,0,0.1) → black at 10% opacity (very faint)
+}
+  → Used in home.html to display each review as a separate white card.
+  → NOT used by results.html (which uses an unstyled HTML table instead).
+
+--- 7. footer ---
+
+footer {
+    text-align: center;                 → Centers the copyright text.
+    padding: 10px;                      → Inner spacing inside the footer bar.
+    background-color: #2874f0;          → Matches the header — same blue at top and bottom.
+    color: white;                       → White text on blue background.
+    margin-top: 30px;                   → 30px gap between the page content and the footer.
+}
+
+COLOUR PALETTE USED:
+---------------------
+  #2874f0  → Flipkart's primary blue (header, footer, button)
+  #0b5ed7  → Darker blue for button hover state
+  #f4f4f4  → Very light grey for page background
+  #ccc     → Light grey for input border
+  white    → Card backgrounds and text on blue elements
+  red      → Error messages
+
+HOW CSS CASCADES (Why it's called "Cascading"):
+------------------------------------------------
+  Styles flow from general (body) to specific (.search-box button:hover).
+  More specific rules override less specific ones.
+  For example:
+      body { color: black; }          → applies to all text by default
+      header { color: white; }        → overrides body for text inside header
+      .search-box button { color: white; } → overrides for the button specifically
+
+WHICH PAGES USE THIS CSS:
+--------------------------
+  ✅ base.html    → links the stylesheet directly
+  ✅ index.html   → inherits via base.html (uses .search-box, .error)
+  ✅ home.html    → inherits via base.html (uses .card)
+  ❌ results.html → does NOT link this CSS (standalone, unstyled table)
+======================================================================
+*/

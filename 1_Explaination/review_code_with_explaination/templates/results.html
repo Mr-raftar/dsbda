@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+</head>
+<body>
+
+<h2>Reviews</h2>
+
+<table border="1">
+<tr>
+    <th>Name</th>
+    <th>Rating</th>
+    <th>Title</th>
+    <th>Comment</th>
+</tr>
+
+{% for review in reviews %}
+<tr>
+    <td>{{ review.Name }}</td>
+    <td>{{ review.Rating }}</td>
+    <td>{{ review.CommentHead }}</td>
+    <td>{{ review.Comment }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+<a href="/">Back</a>
+
+</body>
+</html>
+
+
+<!--
+======================================================================
+EXPLANATION OF results.html
+======================================================================
+
+WHAT THIS FILE IS:
+------------------
+results.html is the PAGE THAT DISPLAYS SCRAPED REVIEWS after the user
+searches for a product. It receives a list of review dictionaries from
+Flask and renders them in a simple HTML table — one row per review.
+
+Unlike index.html and home.html, this file does NOT extend base.html.
+It is a completely standalone HTML page with its own minimal structure.
+This means it has no blue header/footer styling — just a plain table.
+
+LINE-BY-LINE EXPLANATION:
+--------------------------
+
+<!DOCTYPE html>
+  → Declares this as an HTML5 document.
+
+<html> / <head> / <body>
+  → Standard HTML document structure.
+  → No CSS is linked here — the table uses the browser's default styling.
+
+<title>Results</title>
+  → Browser tab title shown as "Results".
+
+<h2>Reviews</h2>
+  → A heading displayed above the table.
+
+<table border="1">
+  → Creates an HTML table with a visible border of 1 pixel on all cells.
+  → border="1" is an older HTML attribute — in modern apps this would
+    be done with CSS (border: 1px solid black), but it works fine here.
+
+<tr>
+  → Table Row — wraps a set of cells in one horizontal row.
+
+<th>Name</th>  /  <th>Rating</th>  /  <th>Title</th>  /  <th>Comment</th>
+  → Table Header cells for the column labels.
+  → Browsers render <th> content in bold and centered by default.
+  → These four columns match exactly the four fields stored in MongoDB:
+      Name        → reviewer's name (parsed from the review block)
+      Rating      → star rating (e.g., "4★")
+      Title       → review headline / CommentHead
+      Comment     → full review body text
+
+{% for review in reviews %}
+  → Jinja2 for-loop that iterates over the "reviews" list passed from Flask.
+  → Flask sends this list via: render_template("results.html", reviews=reviews)
+  → Each "review" is a Python dictionary with keys: Name, Rating, CommentHead, Comment.
+
+<tr>
+    <td>{{ review.Name }}</td>
+    <td>{{ review.Rating }}</td>
+    <td>{{ review.CommentHead }}</td>
+    <td>{{ review.Comment }}</td>
+</tr>
+  → For each review dictionary, one <tr> (table row) is created.
+  → <td> = Table Data cell (regular cell, not a header).
+  → {{ review.Name }} → Jinja2 expression that outputs the value of
+    the "Name" key from the review dictionary.
+  → Similarly for Rating, CommentHead, and Comment.
+  → The _id field from MongoDB is NOT shown because Flask fetches
+    data with {"_id": 0} to exclude it.
+
+{% endfor %}
+  → Closes the Jinja2 for-loop.
+  → After this point, the table body is complete.
+
+<a href="/">Back</a>
+  → A simple hyperlink that takes the user back to the homepage ("/").
+  → Clicking "Back" shows the search form again so the user can
+    search for another product.
+
+HOW THIS PAGE GETS ITS DATA:
+------------------------------
+  In main.py, after scraping:
+      return render_template("results.html", reviews=reviews)
+
+  "reviews" is a list of dictionaries, e.g.:
+      [
+        {"Product": "iphone", "Name": "Rahul", "Rating": "4★",
+         "CommentHead": "Great phone", "Comment": "Battery life is amazing"},
+        {"Product": "iphone", "Name": "Priya", "Rating": "5★",
+         "CommentHead": "Worth it", "Comment": "Camera quality is superb"},
+        ...
+      ]
+
+  Jinja2 loops over this list and creates one table row per dictionary.
+
+DIFFERENCE FROM home.html:
+----------------------------
+  Both results.html and home.html display reviews, but:
+  • results.html → Used by the current route in main.py. Plain table,
+                   no base layout, no blue header/footer.
+  • home.html    → Uses card-style layout with base.html styling.
+                   NOT currently used by any route in main.py.
+                   It exists as an alternative display format.
+
+WHAT COULD BE IMPROVED:
+------------------------
+  • Link the CSS file (style.css) to style the table better
+  • Extend base.html to get the header and footer automatically
+  • Add a "Product" column to show which product the review is for
+  • Add pagination if more than 10 reviews are shown
+======================================================================
+-->

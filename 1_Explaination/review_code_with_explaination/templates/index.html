@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="search-box">
+    <form action="/" method="POST">
+        <input type="text" name="content" placeholder="Search for a product..." required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+</div>
+
+{% endblock %}
+
+
+<!--
+======================================================================
+EXPLANATION OF index.html
+======================================================================
+
+WHAT THIS FILE IS:
+------------------
+index.html is the HOMEPAGE of the application — the first page the
+user sees when they visit http://localhost:5000/
+
+It shows a search box where the user can type a product name.
+When the form is submitted, Flask scrapes Flipkart and shows results.
+If anything goes wrong (e.g., no product found), an error message
+is displayed on this same page.
+
+LINE-BY-LINE EXPLANATION:
+--------------------------
+
+{% extends "base.html" %}
+  → Tells Jinja2 that this template "inherits" from base.html.
+  → This means the full HTML structure (DOCTYPE, head, header,
+    footer) is automatically included from base.html.
+  → This page ONLY defines its own unique content section.
+
+{% block content %}
+  → Opens the content block, which replaces the {% block content %}
+    placeholder in base.html.
+  → Everything between {% block content %} and {% endblock %}
+    is inserted into the base layout's container div.
+
+<div class="search-box">
+  → A styled container div for the search form.
+  → The "search-box" CSS class in style.css centers it and adds padding.
+
+<form action="/" method="POST">
+  → HTML form that sends data to the server when submitted.
+  → action="/"   → The form data is sent to the "/" route in main.py.
+  → method="POST" → Uses HTTP POST method (not GET) so the search
+                    term is sent in the request body, not the URL bar.
+
+<input type="text" name="content" placeholder="Search for a product..." required>
+  → A single-line text input where the user types the product name.
+  → name="content"  → This is the key Flask reads with request.form.get("content").
+  → placeholder="..." → Grey hint text shown when the box is empty.
+  → required        → Browser won't submit the form if this field is blank.
+
+<button type="submit">Search</button>
+  → Submits the form when clicked.
+  → Styled with Flipkart blue background in style.css.
+
+{% if error %}
+    <p class="error">{{ error }}</p>
+{% endif %}
+  → Jinja2 conditional block.
+  → "error" is a variable passed from Flask's render_template() call.
+  → If the Python backend sends an error message (e.g., "No products
+    found on Flipkart"), this paragraph appears in red below the form.
+  → If there is no error, this entire block is invisible.
+  → Example errors that can appear here:
+      • "Please enter a product name"
+      • "No products found on Flipkart"
+      • "No reviews found."
+      • "An error occurred: ..."
+
+{% endblock %}
+  → Closes the content block. Jinja2 stops replacing here.
+
+HOW THIS PAGE CONNECTS TO THE BACKEND:
+---------------------------------------
+  1. User visits "/" → Flask's index() function detects GET → renders index.html
+  2. User types product name and clicks Search
+  3. Browser sends POST request to "/" with form data: content="iphone 15"
+  4. Flask's index() function reads request.form.get("content")
+  5. Scraping begins (or cached results are fetched)
+  6. On success → results.html is rendered (review table)
+  7. On failure → index.html is re-rendered with the error variable set
+
+CSS CLASSES USED:
+-----------------
+  .search-box   → Centers the form on the page (text-align: center)
+  .error        → Makes the error text red (color: red)
+  button        → Styled in .search-box button with Flipkart blue
+======================================================================
+-->

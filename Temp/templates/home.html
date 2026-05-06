@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Scraped Reviews</h2>
+
+{% for review in reviews %}
+    <div class="card">
+        <p><strong>Product:</strong> {{ review.Product }}</p>
+        <p><strong>Name:</strong> {{ review.Name }}</p>
+        <p><strong>Rating:</strong> {{ review.Rating }}</p>
+        <p><strong>Title:</strong> {{ review.CommentHead }}</p>
+        <p><strong>Comment:</strong> {{ review.Comment }}</p>
+    </div>
+{% endfor %}
+
+{% endblock %}

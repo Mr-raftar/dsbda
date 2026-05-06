@@ -1,0 +1,86 @@
+# ----------------------------
+# 1. UPDATE SYSTEM
+# ----------------------------
+sudo apt update && sudo apt upgrade -y
+
+
+# ----------------------------
+# 2. DOWNLOAD ANACONDA
+# ----------------------------
+wget https://repo.anaconda.com/archive/Anaconda3-latest-Linux-x86_64.sh
+
+
+# ----------------------------
+# 3. (OPTIONAL) VERIFY FILE
+# ----------------------------
+sha256sum Anaconda3-latest-Linux-x86_64.sh
+
+
+# ----------------------------
+# 4. RUN INSTALLER
+# ----------------------------
+bash Anaconda3-latest-Linux-x86_64.sh
+
+# 👉 During installation:
+# Press ENTER to scroll
+# Type 'yes' to accept license
+# Press ENTER for default path
+# Type 'yes' to initialize
+
+
+# ----------------------------
+# 5. ACTIVATE ANACONDA
+# ----------------------------
+source ~/.bashrc
+
+
+# ----------------------------
+# 6. CHECK INSTALLATION
+# ----------------------------
+conda --version
+
+
+# ----------------------------
+# 7. INSTALL JUPYTER
+# ----------------------------
+conda install jupyter -y
+
+# OR install JupyterLab (recommended)
+conda install jupyterlab -y
+
+
+# ----------------------------
+# 8. RUN JUPYTER
+# ----------------------------
+jupyter notebook
+
+# OR
+jupyter lab
+
+
+# ----------------------------
+# 9. CREATE ENVIRONMENT (OPTIONAL)
+# ----------------------------
+conda create -n myenv python=3.10 -y
+conda activate myenv
+
+
+# ----------------------------
+# 10. OPEN PROJECT FOLDER
+# ----------------------------
+cd /home/kartik/dsbda_prac
+jupyter notebook
+
+
+# ----------------------------
+# FIXES (IF ERRORS)
+# ----------------------------
+
+# Fix conda not found
+export PATH=~/anaconda3/bin:$PATH
+
+# Run without browser
+jupyter notebook --no-browser
+
+# Change port
+jupyter notebook --port=8889

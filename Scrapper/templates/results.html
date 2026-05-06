@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+</head>
+<body>
+
+<h2>Reviews</h2>
+
+<table border="1">
+<tr>
+    <th>Name</th>
+    <th>Rating</th>
+    <th>Title</th>
+    <th>Comment</th>
+</tr>
+
+{% for review in reviews %}
+<tr>
+    <td>{{ review.Name }}</td>
+    <td>{{ review.Rating }}</td>
+    <td>{{ review.CommentHead }}</td>
+    <td>{{ review.Comment }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+<a href="/">Back</a>
+
+</body>
+</html>

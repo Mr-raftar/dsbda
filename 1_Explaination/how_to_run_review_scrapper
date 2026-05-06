@@ -1,0 +1,113 @@
+# ============================================================
+#        TABLEAU INSTALLATION ON UBUNTU (USING WINE)
+# ============================================================
+
+# ----------------------------
+# 1. UPDATE SYSTEM
+# ----------------------------
+# Update package list and upgrade existing packages
+sudo apt update && sudo apt upgrade -y
+
+
+# ----------------------------
+# 2. ENABLE 32-BIT SUPPORT
+# ----------------------------
+# Required because many Windows apps (like Tableau) need 32-bit libraries
+sudo dpkg --add-architecture i386
+
+
+# ----------------------------
+# 3. INSTALL REQUIRED DEPENDENCIES
+# ----------------------------
+# Install basic tools required for Wine and Windows apps
+sudo apt install software-properties-common wget apt-transport-https -y
+
+
+# ----------------------------
+# 4. INSTALL WINE (WINDOWS COMPATIBILITY LAYER)
+# ----------------------------
+# Install Wine to run Windows applications on Ubuntu
+sudo apt install wine64 wine32 winbind -y
+
+
+# ----------------------------
+# 5. VERIFY WINE INSTALLATION
+# ----------------------------
+# Check if Wine is installed properly
+wine --version
+
+
+# ----------------------------
+# 6. INITIALIZE WINE
+# ----------------------------
+# This sets up Wine environment (~/.wine folder)
+winecfg
+
+# 👉 A window will open:
+# - Select Windows Version = Windows 10
+# - Click OK
+
+
+# ----------------------------
+# 7. DOWNLOAD TABLEAU PUBLIC (WINDOWS VERSION)
+# ----------------------------
+# Download latest Tableau Public installer
+wget https://downloads.tableau.com/esdalt/2024.1.0/TableauPublicDesktop-64bit-2024-1-0.exe
+
+
+# ----------------------------
+# 8. INSTALL TABLEAU
+# ----------------------------
+# Run Tableau installer using Wine
+wine TableauPublicDesktop-64bit-2024-1-0.exe
+
+# 👉 Follow GUI steps:
+# Click "Next"
+# Accept License
+# Click "Install"
+# Wait for installation to complete
+
+
+# ----------------------------
+# 9. RUN TABLEAU
+# ----------------------------
+# Launch Tableau after installation
+wine ~/.wine/drive_c/Program\ Files/Tableau/Tableau\ Public/bin/tableau.exe
+
+
+# ----------------------------
+# 10. CREATE DESKTOP SHORTCUT (OPTIONAL)
+# ----------------------------
+# Create a shell script to launch Tableau easily
+echo 'wine ~/.wine/drive_c/Program\ Files/Tableau/Tableau\ Public/bin/tableau.exe' > ~/Desktop/tableau.sh
+
+# Make it executable
+chmod +x ~/Desktop/tableau.sh
+
+
+# ----------------------------
+# 11. ALTERNATIVE (WEB VERSION)
+# ----------------------------
+# Open Tableau Public in browser (no installation needed)
+xdg-open https://public.tableau.com/
+
+
+# ============================================================
+#                    📘 NOTES / EXPLANATION
+# ============================================================
+
+# 1. Wine allows Windows applications to run on Linux.
+# 2. Tableau has no native Linux version, so Wine is required.
+# 3. 32-bit architecture is enabled for compatibility.
+# 4. Tableau Public is free and used for visualization practice.
+# 5. winecfg initializes the environment before installation.
+# 6. The .exe file is a Windows installer executed via Wine.
+# 7. Desktop shortcut makes launching easier.
+
+# ============================================================
+#                    🎯 VIVA QUICK ANSWER
+# ============================================================
+
+# Tableau is a data visualization tool used to create dashboards
+# and interactive reports. On Ubuntu, it is installed using Wine
+# since Tableau does not provide a native Linux version.

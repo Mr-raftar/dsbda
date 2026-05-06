@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Review Scraper</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header>
+        <h1>Flipkart Review Scraper</h1>
+    </header>
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p>© 2026 Review Scraper | Built with Flask</p>
+    </footer>
+
+</body>
+</html>
+
+
+<!--
+======================================================================
+EXPLANATION OF base.html
+======================================================================
+
+WHAT THIS FILE IS:
+------------------
+base.html is the MASTER LAYOUT template for the entire website.
+It defines the common structure (header, container, footer) that
+every page shares. Child templates "extend" this file and only
+fill in the parts that change.
+
+This pattern is called Template Inheritance (provided by Jinja2,
+Flask's built-in templating engine).
+
+LINE-BY-LINE EXPLANATION:
+--------------------------
+
+<!DOCTYPE html>
+  → Tells the browser this is an HTML5 document.
+
+<html lang="en">
+  → Root element of the page. lang="en" declares English language
+    (helps screen readers and search engines).
+
+<meta charset="UTF-8">
+  → Sets character encoding to UTF-8, which supports all standard
+    characters including special symbols and accented letters.
+
+<title>Review Scraper</title>
+  → The text shown in the browser tab or window title bar.
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  → Links the CSS file for visual styling.
+  → {{ url_for(...) }} is a Jinja2 expression that generates the
+    correct URL path to the static file automatically, regardless
+    of where the app is hosted.
+  NOTE: The current path uses "css/style.css" but the actual file is
+        at "static/style.css". If the CSS does not load, change the
+        filename to just "style.css" in main.py's static folder config.
+
+<header>
+  → A semantic HTML5 element for the top section of the page.
+  → Contains the site title "Flipkart Review Scraper".
+  → Styled in style.css with a Flipkart-blue background (#2874f0).
+
+<div class="container">
+  → A wrapper div that centers and constrains the main page content.
+  → Width set to 80% in CSS with auto margin for centering.
+
+{% block content %}
+{% endblock %}
+  → This is a Jinja2 BLOCK — a named placeholder that child templates
+    fill with their own content.
+  → When index.html extends base.html, it places its search form here.
+  → When home.html extends base.html, it places the review cards here.
+  → base.html itself leaves this block empty.
+
+<footer>
+  → Semantic HTML5 footer element shown at the bottom of every page.
+  → Contains copyright text, styled with the same blue as the header.
+
+HOW TEMPLATE INHERITANCE WORKS:
+---------------------------------
+  base.html defines the skeleton.
+  Child templates (index.html, home.html) use:
+
+      {% extends "base.html" %}
+      {% block content %}
+          ... their unique content here ...
+      {% endblock %}
+
+  When Flask renders index.html, Jinja2 merges it with base.html,
+  replacing {% block content %} with the child's content block.
+  The header and footer are automatically included from base.html.
+
+WHY USE A BASE TEMPLATE?
+--------------------------
+  Without base.html, every page would need to repeat the <head>,
+  <header>, <footer> and container structure. Any change to the
+  site title, CSS link, or footer would need to be updated in
+  every single file. base.html centralises this — change it once,
+  all pages update automatically.
+
+PAGES THAT USE THIS FILE:
+--------------------------
+  • index.html  → extends base.html (shows the search form)
+  • home.html   → extends base.html (shows review cards)
+  • results.html → does NOT extend base.html (it's standalone HTML)
+======================================================================
+-->
