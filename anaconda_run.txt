@@ -1,0 +1,107 @@
+# ==============================
+# ANACONDA FULL BASIC USAGE
+# ==============================
+
+# Fix conda if not recognized
+source ~/anaconda3/etc/profile.d/conda.sh
+
+# Activate base environment
+conda activate
+
+# Check version
+conda --version
+
+# Open Anaconda Navigator (GUI)
+anaconda-navigator
+
+# Start Jupyter Notebook
+jupyter notebook
+
+# Start Jupyter Lab
+jupyter lab
+
+# List environments
+conda env list
+
+# Create new environment
+conda create -n myenv python=3.10 -y
+
+# Activate new environment
+conda activate myenv
+
+# Install common packages
+conda install numpy pandas matplotlib scikit-learn -y
+
+
+# ==============================
+# 1. INSTALL ANACONDA (if not installed)
+# ==============================
+wget https://repo.anaconda.com/archive/Anaconda3-latest-Linux-x86_64.sh
+
+bash Anaconda3-latest-Linux-x86_64.sh
+
+# After installation restart terminal
+source ~/.bashrc
+
+
+# ==============================
+# 2. INITIALIZE CONDA
+# ==============================
+conda init
+
+# restart terminal again after this step
+
+
+# ==============================
+# 3. CHECK CONDA VERSION
+# ==============================
+conda --version
+
+
+# ==============================
+# 4. ACTIVATE ANACONDA
+# ==============================
+conda activate
+
+
+# OR if error comes:
+source ~/anaconda3/etc/profile.d/conda.sh
+conda activate
+
+
+# ==============================
+# 5. OPEN ANACONDA NAVIGATOR (GUI)
+# ==============================
+anaconda-navigator
+
+
+# ==============================
+# 6. START JUPYTER NOTEBOOK
+# ==============================
+jupyter notebook
+
+
+# ==============================
+# 7. START JUPYTER LAB
+# ==============================
+jupyter lab
+
+
+# ==============================
+# 8. CREATE NEW ENVIRONMENT (OPTIONAL)
+# ==============================
+conda create -n myenv python=3.10 -y
+conda activate myenv
+
+
+# ==============================
+# 9. LIST ENVIRONMENTS
+# ==============================
+conda env list
+
+
+# ==============================
+# 10. INSTALL PACKAGES
+# ==============================
+conda install numpy pandas matplotlib scikit-learn -y
+
